@@ -31,15 +31,24 @@ class _HomeState extends State<Home> {
               child: Column(
                 children: <Widget>[
                   TextButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/location');
-                      },
-                      child: Text(
-                        'Edit Location',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
+                    onPressed: () async {
+                      dynamic result = await Navigator.pushNamed(context, '/location');
+                      setState(() {
+                        print(result['time']);
+                        data = {
+                          'location': result['location'],
+                          'flag': result['flag'],
+                          'time': result['time'],
+                          'isDaytime': result['isDaytime'],
+                        };
+                      });
+                    },
+                    child: Text(
+                      'Edit Location',
+                      style: TextStyle(
+                        color: Colors.white,
                       ),
+                    ),
                   ),
                   SizedBox(height: 20.0),
                   Row(
